@@ -8,6 +8,6 @@ public class Solution {
 
 	@RequestMapping("/")
 	public String index() {
-		return "Greetings from Smeet Spring Boot! --- Nidhi APP";
+		return "Greetings from Smeet Spring Boot! --- Nidhi APP Hello";
 	}
 }
