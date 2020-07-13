@@ -20,18 +20,24 @@ public class IngredientsController {
 		return "Welcome to Food Planner App";
 	}
 
-	@RequestMapping("/ingredients")
-	public ResponseEntity<List<Ingredient>> getIngredient() {
-		List<Ingredient> list = new LinkedList<Ingredient>();
+	private List<Ingredient> list = new LinkedList<Ingredient>();
+
+	public IngredientsController()
+	{
 		list.add(new Ingredient("Carrot", "Produce"));
 		list.add(new Ingredient("Bean", "Produce"));
 		list.add(new Ingredient("Milk", "Dairy"));
 		list.add(new Ingredient("Eggs", "Dairy"));
+	}
+	
+	@RequestMapping("/ingredients")
+	public ResponseEntity<List<Ingredient>> getIngredient() {
 		return new ResponseEntity<List<Ingredient>>(list, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/products", method = RequestMethod.POST)
-	public ResponseEntity<String> createProduct(@RequestBody Ingredient ingredient) {
-		return new ResponseEntity<String>("Working on it", HttpStatus.ACCEPTED);
+	@RequestMapping(value = "/ingredients", method = RequestMethod.POST)
+	public ResponseEntity<List<Ingredient>> createProduct(@RequestBody Ingredient ingredient) {
+		list.add(ingredient);
+		return new ResponseEntity<List<Ingredient>>(list, HttpStatus.ACCEPTED);
 	}
 }
