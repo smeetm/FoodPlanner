@@ -1,4 +1,4 @@
-1. Install java --- add to PATH variable 
+1. Install java --- add to PATH variable also add JAVA_HOME variable
 2. Install maven -- add to PATH variable 
 3. Update the file settings.xml in the maven directory
 
@@ -14,5 +14,8 @@ Eg: C:\Downloads\apache-maven-3.6.3-bin\apache-maven-3.6.3\conf\settings.xml
    	</configuration>
   </server>
 
-3. Clone repo https://github.com/smeetm/FoodPlanner.git
-4. Deploy mvn package azure-webapp:deploy 
+3. Clone Repo https://github.com/smeetm/FoodPlanner.git
+4. Test Changes on Local First: Run as Java Application , go to localhost:8080
+5. TO Deploy Run: deploy.sh (For Mac), deploy.cmd(For Windows) or go to terminal/Command Prompt
+   and run this command from the project root folder : mvn package azure-webapp:deploy
+6. Go to https://foodplannerapp.azurewebsites.net/ to test changes
