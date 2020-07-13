@@ -26,6 +26,7 @@ public class IngredientsController {
 		list.add(new Ingredient("Carrot", "Produce"));
 		list.add(new Ingredient("Bean", "Produce"));
 		list.add(new Ingredient("Milk", "Dairy"));
+		list.add(new Ingredient("Eggs", "Dairy"));
 		return new ResponseEntity<List<Ingredient>>(list, HttpStatus.OK);
 	}
 
