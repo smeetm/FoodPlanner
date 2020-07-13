@@ -19,3 +19,4 @@ Eg: C:\Downloads\apache-maven-3.6.3-bin\apache-maven-3.6.3\conf\settings.xml
 5. TO Deploy Run: deploy.sh (For Mac), deploy.cmd(For Windows) or go to terminal/Command Prompt
    and run this command from the project root folder : mvn package azure-webapp:deploy
 6. Go to https://foodplannerapp.azurewebsites.net/ to test changes
+7. Before pushing changes to remote git repo , run as maven clean and refresh the project
