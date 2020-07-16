@@ -1,8 +1,14 @@
 package com.foodplanner.mongoclient;
 
+import java.util.List;
+
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+
 import com.foodplanner.model.Recipe;
 
 //Can be made singleton
+@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class RecipeDbMongoClient extends MongoClientBase<Recipe>{
 	
 	public RecipeDbMongoClient()
@@ -20,7 +26,12 @@ public class RecipeDbMongoClient extends MongoClientBase<Recipe>{
 	
 	public Recipe getRecipeById(String id)
 	{
-		return (Recipe)this.getById("recipeId", id);
+		return (Recipe)this.getUniqueEntityByField("recipeId", id);
+	}
+	
+	public List<Recipe> getRecipesByUser(String user)
+	{
+		return (List<Recipe>)this.getMultipleEntitiesByField("user", user,20);
 	}
 
 }

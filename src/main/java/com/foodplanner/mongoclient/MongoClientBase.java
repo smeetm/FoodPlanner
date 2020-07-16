@@ -1,10 +1,13 @@
 package com.foodplanner.mongoclient;
 
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.regex;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
-import org.bson.Document;
+import java.util.LinkedList;
+import java.util.List;
+
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 
@@ -41,7 +44,7 @@ public abstract class MongoClientBase<T> {
 
 	}
 	
-	protected T getById(String field,String id)
+	protected T getUniqueEntityByField(String field,String value)
 	{		
 		CodecRegistry pojoCodecRegistry = fromRegistries(this.mongoClient.getDefaultCodecRegistry(),
                 fromProviders(PojoCodecProvider.builder().automatic(true).build()));
@@ -49,8 +52,32 @@ public abstract class MongoClientBase<T> {
 		this.collection = database.getCollection(collectionName,typeParameterClass);
 		this.collection = this.collection.withCodecRegistry(pojoCodecRegistry);
 
-		T doc = collection.find(eq(field, id)).first();
+		T doc = collection.find(eq(field, value)).first();
 		return doc;
+	}
+
+	protected List<T> getMultipleEntitiesByField(String field,String value,int batchSize)
+	{		
+		CodecRegistry pojoCodecRegistry = fromRegistries(this.mongoClient.getDefaultCodecRegistry(),
+                fromProviders(PojoCodecProvider.builder().automatic(true).build()));
+
+		this.collection = database.getCollection(collectionName,typeParameterClass);
+		this.collection = this.collection.withCodecRegistry(pojoCodecRegistry);
+
+		List<T> docs = collection.find(eq(field, value)).batchSize(batchSize).into(new LinkedList<T>());
+		return docs;
+	}
+	
+	protected List<T> getMultipleEntitiesByFieldPrefix(String field,String value,int batchSize)
+	{		
+		CodecRegistry pojoCodecRegistry = fromRegistries(this.mongoClient.getDefaultCodecRegistry(),
+                fromProviders(PojoCodecProvider.builder().automatic(true).build()));
+
+		this.collection = database.getCollection(collectionName,typeParameterClass);
+		this.collection = this.collection.withCodecRegistry(pojoCodecRegistry);
+
+		List<T> docs = collection.find(regex(field, value+".*")).batchSize(batchSize).into(new LinkedList<T>());
+		return docs;
 	}
 	
 	protected void insertEntity(T entity)

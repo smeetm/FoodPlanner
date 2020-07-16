@@ -9,6 +9,17 @@ public class Ingredient {
 	private String name;
 	private float quantity;
 	
+	public Ingredient()
+	{
+		
+	}
+	
+	public Ingredient(String name,float qty)
+	{
+		this.name = name;
+		this.quantity = qty;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -21,30 +32,4 @@ public class Ingredient {
 	public void setQuantity(float quantity) {
 		this.quantity = quantity;
 	}
-	
-	
-	public static List<Ingredient> aggregateIngredients(List<Ingredient> ingredients)
-	{
-		HashMap<String,Float> totalIngredientsMap = new HashMap<String,Float>();
-		
-		for(Ingredient i : ingredients)
-		{
-			String currIngredient = i.name;
-			float qtyOfIngredientSoFar = totalIngredientsMap.getOrDefault(currIngredient, (float) (0))+i.getQuantity();
-			
-			totalIngredientsMap.put(currIngredient, qtyOfIngredientSoFar);
-		}
-		
-		List<Ingredient> calculatedIngredients = new LinkedList<Ingredient>();
-				
-		totalIngredientsMap.forEach( (ingredientName,qty) -> {
-			 Ingredient i = new Ingredient();
-			 i.setName(ingredientName);
-			 i.setQuantity(qty);
-			 calculatedIngredients.add(i);
-		});
-		
-		return calculatedIngredients;
-	}
-	
 }
