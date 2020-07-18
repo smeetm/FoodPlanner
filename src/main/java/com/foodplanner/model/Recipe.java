@@ -6,10 +6,9 @@ import java.util.List;
 public class Recipe{
 
 	private String user;
-	private List<Ingredient> ingredients;
-	private List<Ingredient> ingredientsForSinglePerson;
+	private List<RecipeIngredient> ingredients;
 	private String steps;
-	private String recipeId;
+	private String id;
 	private int serves;
 	
 	
@@ -21,12 +20,12 @@ public class Recipe{
 		this.serves = serves;
 	}
 	
-	public String getRecipeId() {
-		return recipeId;
+	public String getId() {
+		return id;
 	}
 	
-	public void setRecipeId(String recipeId) {
-		this.recipeId = recipeId;
+	public void setId(String recipeId) {
+		this.id = recipeId;
 	}
 	public String getSteps() {
 		return steps;
@@ -40,16 +39,10 @@ public class Recipe{
 	public void setUser(String user) {
 		this.user = user;
 	}
-	public List<Ingredient> getIngredients() {
+	public List<RecipeIngredient> getIngredients() {
 		return ingredients;
 	}
-	public void setIngredients(List<Ingredient> ingredients) {
+	public void setIngredients(List<RecipeIngredient> ingredients) {
 		this.ingredients = ingredients;
-		ingredientsForSinglePerson = new LinkedList<Ingredient>();
-		
-		for(Ingredient i: this.ingredients)
-		{
-			ingredientsForSinglePerson.add(new Ingredient(i.getName(),i.getQuantity()/this.getServes()));
-		}
 	}
 }

@@ -4,18 +4,19 @@ public class RecipeAndNoOfPeople{
 
 	private String receipeId;
 	private int numOfPeopleToServe;
-	
 	public String getReceipeId() {
 		return receipeId;
 	}
 	public void setReceipeId(String receipeId) {
 		this.receipeId = receipeId;
 	}
-	public int getnumOfPeopleToServe() {
+	public int getNumOfPeopleToServe() {
 		return numOfPeopleToServe;
 	}
-	public void setnumOfPeopleToServe(int toServe) {
-		this.numOfPeopleToServe = toServe;
+	public void setNumOfPeopleToServe(int numOfPeopleToServe) {
+		this.numOfPeopleToServe = numOfPeopleToServe;
 	}
+	
+
 	
 }

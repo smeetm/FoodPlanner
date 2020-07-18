@@ -2,7 +2,7 @@ package com.foodplanner.mongoclient;
 
 import java.util.List;
 
-import com.foodplanner.model.Ingredient;
+import com.foodplanner.model.Ingredient;;
 
 public class IngredientDbMongoClient extends MongoClientBase<Ingredient>{
 	
@@ -14,9 +14,19 @@ public class IngredientDbMongoClient extends MongoClientBase<Ingredient>{
 				Ingredient.class);
 	}
 	
+	public Ingredient getIngredientByName(String name)
+	{
+		return this.getUniqueEntityByField("name", name);
+	}
+	
 	public List<Ingredient> getIngredientsByPrefix(String prefix)
 	{
 		return this.getMultipleEntitiesByFieldPrefix("name",prefix,20);
+	}
+	
+	public void addIngredient(Ingredient i)
+	{
+		this.insertEntity(i);
 	}
 
 }

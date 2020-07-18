@@ -2,14 +2,19 @@ package com.foodplanner.mongoclient;
 
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.regex;
+import static com.mongodb.client.model.Filters.gte;
+import static com.mongodb.client.model.Filters.lte;
+import static com.mongodb.client.model.Filters.and;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
+import org.bson.conversions.Bson;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
@@ -89,5 +94,28 @@ public abstract class MongoClientBase<T> {
 		this.collection = this.collection.withCodecRegistry(pojoCodecRegistry);
 
 		this.collection.insertOne(entity);
+	}
+	
+	protected void replaceOneEntity(String filterField, String filterVal,T newEntity)
+	{
+		CodecRegistry pojoCodecRegistry = fromRegistries(this.mongoClient.getDefaultCodecRegistry(),
+                fromProviders(PojoCodecProvider.builder().automatic(true).build()));
+
+		this.collection = database.getCollection(collectionName,typeParameterClass);
+		this.collection = this.collection.withCodecRegistry(pojoCodecRegistry);
+
+		collection.replaceOne(eq(filterField, filterVal), newEntity);
+	}
+	
+	protected List<T> getEntitiesSatisfyingFilter(Bson filter)
+	{
+		CodecRegistry pojoCodecRegistry = fromRegistries(this.mongoClient.getDefaultCodecRegistry(),
+                fromProviders(PojoCodecProvider.builder().automatic(true).build()));
+
+		this.collection = database.getCollection(collectionName,typeParameterClass);
+		this.collection = this.collection.withCodecRegistry(pojoCodecRegistry);
+
+		List<T> docs = collection.find(filter).into(new LinkedList<T>());
+		return docs;
 	}
 }

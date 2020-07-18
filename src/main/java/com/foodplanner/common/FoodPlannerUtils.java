@@ -4,15 +4,28 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.foodplanner.model.Ingredient;
+import com.foodplanner.model.MealsForTheDay;
 import com.foodplanner.model.Recipe;
 import com.foodplanner.model.RecipeAndNoOfPeople;
+import com.foodplanner.model.RecipeIngredient;
 import com.foodplanner.mongoclient.MongoDbClientFactory;
 import com.foodplanner.mongoclient.RecipeDbMongoClient;
 
 public class FoodPlannerUtils {
 
-	public static List<Ingredient> aggregateIngredients(List<RecipeAndNoOfPeople> recipesForAggregartion) {
+	public static String generateRecipeId(Recipe recipe)
+	{
+		String id = recipe.getUser() + "-" + java.util.UUID.randomUUID().toString();
+		return id;
+	}
+	
+	public static String generateMealsForTheDayId(MealsForTheDay md)
+	{
+		String id = md.getUser()+md.getDate();
+		return id;
+	}
+	
+	public static List<RecipeIngredient> aggregateIngredients(List<RecipeAndNoOfPeople> recipesForAggregartion) {
 		try {
 			// IngredientName,qty - map
 			HashMap<String, Float> totalIngredientsMap = new HashMap<String, Float>();
@@ -20,16 +33,15 @@ public class FoodPlannerUtils {
 
 			for (RecipeAndNoOfPeople recipeAndNoOfPeople : recipesForAggregartion) {
 				String recipeId = recipeAndNoOfPeople.getReceipeId();
-				int noOfPeopleIngredientsReqdFor = recipeAndNoOfPeople.getnumOfPeopleToServe();
+				int noOfPeopleIngredientsReqdFor = recipeAndNoOfPeople.getNumOfPeopleToServe();
 
 				Recipe r = recipeClient.getRecipeById(recipeId);
-
+				if(r == null) continue;
 				// from each recipe calculate how much ingredients we require to serve the
-				// number
 				// number of people represented by variable noOfPeople
 				int thisRecipeServes = r.getServes();
 
-				for (Ingredient currIngredient : r.getIngredients()) {
+				for (RecipeIngredient currIngredient : r.getIngredients()) {
 					float qtyInRecipe = currIngredient.getQuantity();
 					float qtyRequiredForNoOfPeople = (qtyInRecipe / thisRecipeServes) * noOfPeopleIngredientsReqdFor;
 
@@ -40,10 +52,10 @@ public class FoodPlannerUtils {
 				}
 			}
 
-			List<Ingredient> calculatedIngredients = new LinkedList<Ingredient>();
+			List<RecipeIngredient> calculatedIngredients = new LinkedList<RecipeIngredient>();
 
 			totalIngredientsMap.forEach((ingredientName, qty) -> {
-				Ingredient i = new Ingredient();
+				RecipeIngredient i = new RecipeIngredient();
 				i.setName(ingredientName);
 				i.setQuantity(qty);
 				calculatedIngredients.add(i);
