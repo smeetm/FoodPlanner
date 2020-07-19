@@ -42,8 +42,8 @@ public class MealsForTheDayController {
 	
 	@RequestMapping(value = "/mealsForTheDay/{user}", method = RequestMethod.GET)
 	public List<MealsForTheDay> getMealsForTheDay(@PathVariable("user") String user,
-			@RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
-			@RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate)
+			@RequestParam("startDate") Long startDate,
+			@RequestParam("endDate") Long endDate)
 	{
 		return mdClient.getMealsForDays(user,startDate, endDate);
 	}

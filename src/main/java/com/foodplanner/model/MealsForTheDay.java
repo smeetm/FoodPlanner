@@ -1,11 +1,6 @@
 package com.foodplanner.model;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +9,7 @@ public class MealsForTheDay {
 	String id;
 	List<RecipeAndNoOfPeople> recipeAndNumberOfPeople;
 	String user;
-	Date date;
+	Long date;
 	public String getId() {
 		return id;
 	}
@@ -33,11 +28,11 @@ public class MealsForTheDay {
 	public void setUser(String user) {
 		this.user = user;
 	}
-	public Date getDate() {
+	public Long getDate() {
 		return date;
 	}
 	
-	public void setDate(Date date) {
+	public void setDate(Long date) {
 		this.date = date;
 	}
 }

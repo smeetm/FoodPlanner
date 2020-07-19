@@ -26,7 +26,7 @@ public class RecipeDbMongoClient extends MongoClientBase<Recipe>{
 	
 	public Recipe getRecipeById(String id)
 	{
-		return (Recipe)this.getUniqueEntityByField("recipeId", id);
+		return (Recipe)this.getUniqueEntityByField("_id", id);
 	}
 	
 	public List<Recipe> getRecipesByUser(String user)

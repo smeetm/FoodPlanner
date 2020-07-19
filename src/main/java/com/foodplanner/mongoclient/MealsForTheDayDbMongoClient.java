@@ -1,9 +1,9 @@
 package com.foodplanner.mongoclient;
 
 import static com.mongodb.client.model.Filters.and;
+import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.gte;
 import static com.mongodb.client.model.Filters.lte;
-import static com.mongodb.client.model.Filters.eq;
 
 import java.util.Date;
 import java.util.List;
@@ -41,7 +41,7 @@ public class MealsForTheDayDbMongoClient extends MongoClientBase<MealsForTheDay>
 		}
 	}
 	
-	public List<MealsForTheDay> getMealsForDays(String user,Date start,Date end)
+	public List<MealsForTheDay> getMealsForDays(String user,Long start,Long end)
 	{
 		Bson filter = and(gte("date",start),lte("date",end),eq("user",user));
 		return this.getEntitiesSatisfyingFilter(filter);

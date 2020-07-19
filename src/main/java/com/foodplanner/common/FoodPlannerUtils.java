@@ -35,7 +35,9 @@ public class FoodPlannerUtils {
 				String recipeId = recipeAndNoOfPeople.getReceipeId();
 				int noOfPeopleIngredientsReqdFor = recipeAndNoOfPeople.getNumOfPeopleToServe();
 
+				System.out.println("will search fr recipe id "+recipeId);
 				Recipe r = recipeClient.getRecipeById(recipeId);
+				System.out.println("Got recipe : "+r);
 				if(r == null) continue;
 				// from each recipe calculate how much ingredients we require to serve the
 				// number of people represented by variable noOfPeople
