@@ -1,0 +1,139 @@
+{
+	"variables": [],
+	"info": {
+		"name": "FoodPlannerApp",
+		"_postman_id": "f46d9367-7c9d-7bd7-7e61-87b3eb79c072",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CreateIngredient",
+			"request": {
+				"url": "",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "CreateRecipe",
+			"request": {
+				"url": "localhost:8080/recipe",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"user\":\"smmercha\",\r\n\"ingredients\": [\r\n\t\t{\"name\":\"carrot\",\"quantity\":\"30\",\"unit\":\"kg\"},\r\n\t\t{\"name\":\"milk\",\"quantity\":\"2\",\"unit\":\"l\"}\r\n\t]\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "AggregateIngredients",
+			"request": {
+				"url": "localhost:8080/aggregateingredients",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n\t{\n\t\t\"receipeId\": \"smercha-7b9ddbf8-b8d5-4dad-bc7e-3fb795957241\",\n\t\t\"numOfPeopleToServe\": 2\n\t},\n\t{\n\t\t\"receipeId\": \"smercha-402f1575-97c6-4af3-acbd-a51fc6df0f7f\",\n\t\t\"numOfPeopleToServe\": 2\n\t}\n]\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "AddIngredient",
+			"request": {
+				"url": "localhost:8080/addIngredient",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\" : \"carrot\",\n\t\"unit\" : \"kg\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "AddMealsForTheDay",
+			"request": {
+				"url": "localhost:8080/mealsForTheDay",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"user\" : \"ncho12\",\r\n\t\"date\" : \"1595203200000\",\r\n\t\"recipeAndNumberOfPeople\" : [\r\n\t\t{\"receipeId\":\"ncho-3afa8c60-8059-459b-ac82-505962d0f763\",\"numOfPeopleToServe\": 2},\r\n\t\t{\"receipeId\":\"ncho-0e75796b-da4f-49d9-82dd-243ea1095661\",\"numOfPeopleToServe\": 2}\r\n\t]\r\n}\r\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetMealsForTheDay",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/mealsForTheDay/smeettest?startDate=2020-07-18&endDate=2020-07-20",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mealsForTheDay",
+						"smeettest"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "2020-07-18",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "endDate",
+							"value": "2020-07-20",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

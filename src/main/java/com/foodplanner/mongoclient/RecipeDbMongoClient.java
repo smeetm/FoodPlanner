@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
-
+import com.foodplanner.mongoclient.MongoClientBase;
 import com.foodplanner.model.Recipe;
 
 //Can be made singleton

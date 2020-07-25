@@ -1,5 +1,9 @@
 package com.foodplanner.mongoclient;
 
+import com.foodplanner.mongoclient.IngredientDbMongoClient;
+import com.foodplanner.mongoclient.MealsForTheDayDbMongoClient;
+import com.foodplanner.mongoclient.RecipeDbMongoClient;
+
 public class MongoDbClientFactory {
 
 		public static MongoClientBase getDbClient(String clientType) throws Exception

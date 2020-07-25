@@ -17,6 +17,7 @@ import com.foodplanner.common.FoodPlannerUtils;
 import com.foodplanner.model.MealsForTheDay;
 import com.foodplanner.mongoclient.MealsForTheDayDbMongoClient;
 import com.foodplanner.mongoclient.MongoDbClientFactory;
+import com.foodplanner.mongoclient.MongoClientBase;
 
 @RestController
 public class MealsForTheDayController {

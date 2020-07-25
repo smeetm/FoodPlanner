@@ -10,6 +10,7 @@ import com.foodplanner.model.RecipeAndNoOfPeople;
 import com.foodplanner.model.RecipeIngredient;
 import com.foodplanner.mongoclient.MongoDbClientFactory;
 import com.foodplanner.mongoclient.RecipeDbMongoClient;
+import com.foodplanner.mongoclient.MongoClientBase;
 
 public class FoodPlannerUtils {
 

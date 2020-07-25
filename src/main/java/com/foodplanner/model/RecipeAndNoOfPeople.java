@@ -15,8 +15,5 @@ public class RecipeAndNoOfPeople{
 	}
 	public void setNumOfPeopleToServe(int numOfPeopleToServe) {
 		this.numOfPeopleToServe = numOfPeopleToServe;
-	}
-	
-
-	
+	}	
 }
